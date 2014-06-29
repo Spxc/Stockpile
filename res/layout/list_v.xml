@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="vertical"
+    android:background="@drawable/card"
+    android:layout_marginLeft="16dp"
+	android:layout_marginRight="16dp"
+	android:layout_marginTop="16dp"
+	android:divider="@android:color/transparent"
+	android:dividerHeight="10dp">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_launcher" 
+        android:layout_marginLeft="7dp"/>
+
+    <TextView
+        android:id="@+id/id_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView" 
+        android:visibility="gone"/>
+
+    <com.spxc.stockpile.widgets.TextView_Roboto
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/developer"
+        android:layout_alignTop="@+id/icon"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" >
+        </com.spxc.stockpile.widgets.TextView_Roboto>
+
+    <com.spxc.stockpile.widgets.TextView_Roboto
+        android:id="@+id/developer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/icon"
+        android:text="TextView" 
+        android:textSize="12sp"
+        android:layout_marginLeft="7dp"
+        android:textColor="#929292">
+        </com.spxc.stockpile.widgets.TextView_Roboto>
+
+    <TextView
+        android:id="@+id/installed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_alignParentRight="true"
+        android:text="TextView" 
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="#92c04f"
+        android:textAllCaps="true"/>
+
+    <ProgressBar
+        android:id="@+id/pLoader"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignLeft="@+id/icon"
+        android:layout_alignTop="@+id/icon" />
+
+</RelativeLayout>

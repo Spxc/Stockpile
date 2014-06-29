@@ -1,0 +1,58 @@
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="Account">
+
+        <CheckBoxPreference
+            android:key="pref_save_user"
+            android:title="Remember me"
+            android:summary="Save username &amp; password"/>
+        
+        <EditTextPreference
+            android:key="edittext_password"
+            android:title="Change password"
+            android:summary="Create a new login password"
+            android:dialogTitle="New password" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="Application">
+
+        <SwitchPreference 
+            android:summary="Only download apps when on WiFi" 
+            android:title="Download applications using 2G/3G" 
+            android:key="pref_dl_wifi" 
+            android:summaryOn="Download apps using WiFi and 2G/3G" 
+            android:summaryOff="Download apps using WiFi only" 
+            android:disableDependentsState="true"/>
+        
+        <SwitchPreference 
+            android:summary="Updates list of applications on startup" 
+            android:title="Refresh repositories" 
+            android:key="pref_update_rep" 
+            android:summaryOn="Refresh list on startup" 
+            android:summaryOff="Manually refresh list" 
+            android:disableDependentsState="true"/>
+        
+        <CheckBoxPreference
+            android:key="pref_send_stat"
+            android:title="Send statistics"
+            android:summary="Helps us improve the user experience" />
+        
+        <Preference 
+            android:key="pref_update" 
+            android:title="Update application" 
+            android:summary="Look for an update"/>
+        
+        <Preference 
+            android:key="pref_app_stat" 
+            android:title="Current version: " 
+            android:summary="--" android:enabled="false"/>
+        
+        
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

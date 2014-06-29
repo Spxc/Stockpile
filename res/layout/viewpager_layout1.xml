@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.spxc.stockpile.widgets.TextView_Roboto
+            android:id="@+id/txtWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="37dp"
+            android:text="@string/welcome_app"
+            android:textAppearance="?android:attr/textAppearanceLarge">
+            </com.spxc.stockpile.widgets.TextView_Roboto>
+
+        <com.spxc.stockpile.widgets.TextView_Roboto
+            android:id="@+id/txtDescriptionAbout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtWelcome"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:text="@string/about_app">
+            </com.spxc.stockpile.widgets.TextView_Roboto>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/tut_login" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView1"
+            android:layout_alignLeft="@+id/imageView1"
+            android:layout_marginBottom="35dp"
+            android:text="Start by Signing up or Loging in" />
+        
+    </RelativeLayout>
+

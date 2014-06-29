@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+    <string name="app_name">Stockpile</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+    
+    <!-- Application version and other information -->
+    <string name="str_code_name">Whale</string>
+    <string name="str_stage">Beta</string>
+    <string name="str_ver">1.4</string>
+    <string name="str_rel_date">29.06.2014</string>
+     
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >Store home</item>
+        <item >Profile</item>
+        <item >My apps</item>
+        <item >Settings</item>
+        <item >Donate</item>
+        <item >Not Used</item>
+    </string-array>
+     
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_whitespace</item>
+        <item>@drawable/ic_whitespace</item>
+        <item>@drawable/ic_whitespace</item>
+        <item>@drawable/ic_whitespace</item>
+        <item>@drawable/ic_whitespace</item>
+        <item>@drawable/ic_whitespace</item>
+    </array>
+     
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+    
+    <!-- Labels Buttons Main Page -->
+    <string name="btn_apps">APPS</string>
+    <string name="btn_media">MEDIA</string>
+    <string name="btn_tweaks">TWEAKS</string>
+    <string name="btn_themes">THEMES</string>
+    
+    <!-- Labels TextViews Main Page -->
+    <string name="str_applications">Applications</string>
+    <string name="str_tweaks">Tweaks</string>
+ 
+    <!-- Labels TextViews Main Page -->
+    <string name="btn_login">Login</string>
+    <string name="btn_signup">Sign up</string>
+    <string name="btn_registrer">Registrer Account</string>
+    <string name="str_mail">Email</string>
+    <string name="str_password">Password</string>
+    <string name="str_retype_password">Retype password</string>
+    <string name="str_first_name">First name</string>
+    <string name="str_last_name">Last name</string>
+    <string name="str_username">Username</string>
+    <string name="str_welcome">Welcome to Stockpile</string>
+    
+    <!-- Labels Details Page Apps -->
+    <string name="btn_install">Install</string>
+    <string name="btn_uninstall">Uninstall</string>
+    <string name="btn_open">Open</string>
+    
+    <!-- TextView Holders -->
+    <string name="str_apppage">Holder</string>
+    
+    <!-- TextView Tour -->
+    <string name="welcome_app">Hi there!</string>
+    <string name="navigation_app">Navigation</string>
+    <string name="download_app">Installing applications</string>
+    <string name="about_app">We will now guide you through the basic tutorial</string>
+</resources>

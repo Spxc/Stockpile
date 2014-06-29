@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    tools:context=".FragList" >
+
+    <EditText
+        android:id="@+id/edFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:layout_marginTop="10dp" 
+        android:background="@drawable/input_field_bg"
+        android:hint="@string/str_first_name">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edFirstName"
+        android:ems="10" 
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_field_bg"
+        android:hint="@string/str_last_name"/>
+
+    <EditText
+        android:id="@+id/edUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edLastName"
+        android:ems="10" 
+        android:layout_marginTop="30dp"
+        android:background="@drawable/input_field_bg"
+        android:hint="@string/str_username"/>
+
+    <EditText
+        android:id="@+id/edEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edUsername"
+        android:ems="10"
+        android:inputType="textEmailAddress" 
+        android:layout_marginTop="30dp"
+        android:background="@drawable/input_field_bg"
+        android:hint="@string/str_mail"/>
+
+    <EditText
+        android:id="@+id/edPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edEmail"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp" 
+        android:background="@drawable/input_field_bg"
+        android:hint="@string/str_password"/>
+
+    <EditText
+        android:id="@+id/edPasswordRetype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edPassword"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp" 
+        android:background="@drawable/input_field_bg"
+        android:hint="@string/str_retype_password"/>
+
+    <Button
+        android:id="@+id/btnRegistrer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/selector_registrer"
+        android:text="@string/btn_registrer"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
