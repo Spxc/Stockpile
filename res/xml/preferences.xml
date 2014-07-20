@@ -14,6 +14,11 @@
             android:title="Change password"
             android:summary="Create a new login password"
             android:dialogTitle="New password" />
+        
+        <Preference 
+            android:key="pref_logout" 
+            android:title="Sign out" 
+            android:summary="Sign out of your account"/>
 
     </PreferenceCategory>
 

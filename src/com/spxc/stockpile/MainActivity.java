@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.spxc.stockpile.adapter.NavDrawerListAdapter;
 import com.spxc.stockpile.fragments.FragHome;
 import com.spxc.stockpile.fragments.FragSettings;
+import com.spxc.stockpile.fragments.FragProfile;
 import com.spxc.stockpile.helper.DatabaseHandler;
 import com.spxc.stockpile.helper.Datas;
 import com.spxc.stockpile.model.NavDrawerItem;
@@ -62,18 +63,6 @@ public class MainActivity extends Activity {
     
     String strCategory, strEmail, strName, url;
 	int strCount;
-    
-    private static final String TAG_ID = "id";
-    private static final String TAG_ITEM = "app_item";
-	private static final String TAG_ICON = "app_icon";
-	private static final String TAG_NAME = "app_name";
-	private static final String TAG_DL = "app_dl_url";
-	private static final String TAG_DESC = "app_description";
-	private static final String TAG_CATEGORY = "app_category";
-	private static final String TAG_UPDATED = "app_updated";
-	private static final String TAG_VERSION = "app_ver";
-	private static final String TAG_DEVELOPER = "app_developer";
-	private static final String TAG_SIZE = "app_size";
  
 	final DatabaseHandler db = new DatabaseHandler(this);
 	
@@ -206,8 +195,8 @@ public class MainActivity extends Activity {
         }
         // Handle action bar actions click
         switch (item.getItemId()) {
-        case R.id.action_settings:
-            return true;
+        //case R.id.action_settings:
+          //  return true;
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -220,11 +209,11 @@ public class MainActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(true);
+        //menu.findItem(R.id.action_settings).setVisible(true);
         if (drawerOpen) {
-        	getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#92C04F")));
+        	getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#1CC2ED")));
         } else if (!drawerOpen) {
-        	getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#666666")));
+        	getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#1CC2ED")));
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -242,7 +231,7 @@ public class MainActivity extends Activity {
             showCount = false;
             break;
         case 1:
-//          fragment = new PhotosFragment();
+          fragment = new FragProfile();
             break;
         case 2:
 //            fragment = new PhotosFragment();

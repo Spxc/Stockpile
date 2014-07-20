@@ -6,25 +6,36 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.MatrixCursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 
 import com.spxc.stockpile.AppDetailsActivity;
 import com.spxc.stockpile.R;
 import com.spxc.stockpile.adapter.LazyAdapter;
+import com.spxc.stockpile.adapter.SearchAdapter;
 import com.spxc.stockpile.helper.DatabaseHandler;
 import com.spxc.stockpile.helper.Datas;
 
-public class FragList extends Activity {
+public class FragList extends Activity { 
     
 	public static final String TAG_ICON = "app_icon";
 	public static final String TAG_NAME = "app_name";
@@ -44,7 +55,7 @@ public class FragList extends Activity {
     int intCat;
     
     final DatabaseHandler db = new DatabaseHandler(this);
- 
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

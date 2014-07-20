@@ -157,6 +157,79 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return contact list
         return dataList;
     }
+    
+    public List<Datas> getFeaturedDatas() {
+        List<Datas> dataList = new ArrayList<Datas>();
+        String cat1 = "1";
+        String cat2 = "2";
+        String cat3 = "3";
+        String cat4 = "4";
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_DATAS + " WHERE " + KEY_CATEGORY + "=" + cat1 
+        		+ " OR " + KEY_CATEGORY + "=" + cat2 
+        		+ " OR " + KEY_CATEGORY + "=" + cat4 
+        		+ " ORDER BY id DESC LIMIT 3";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Datas data = new Datas();
+                data.setID(Integer.parseInt(cursor.getString(0)));
+                data.setName(cursor.getString(1));
+                data.setIcon(cursor.getString(2));
+                data.setDeveloper(cursor.getString(3));
+                data.setDescription(cursor.getString(4));
+                data.setVersion(cursor.getString(5));
+                data.setDownload(cursor.getString(6));
+                data.setUpdated(cursor.getString(7));
+                data.setSize(cursor.getString(8));
+                data.setCategory(cursor.getString(9));
+                data.setStatistics(cursor.getString(10));
+                data.setPackage(cursor.getString(11));
+                // Adding contact to list
+                dataList.add(data);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return dataList;
+    }
+    
+    public List<Datas> getFeaturedTweaksDatas(String category) {
+        List<Datas> dataList = new ArrayList<Datas>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_DATAS + " WHERE " + KEY_CATEGORY + "=" + category + " ORDER BY id DESC LIMIT 3";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Datas data = new Datas();
+                data.setID(Integer.parseInt(cursor.getString(0)));
+                data.setName(cursor.getString(1));
+                data.setIcon(cursor.getString(2));
+                data.setDeveloper(cursor.getString(3));
+                data.setDescription(cursor.getString(4));
+                data.setVersion(cursor.getString(5));
+                data.setDownload(cursor.getString(6));
+                data.setUpdated(cursor.getString(7));
+                data.setSize(cursor.getString(8));
+                data.setCategory(cursor.getString(9));
+                data.setStatistics(cursor.getString(10));
+                data.setPackage(cursor.getString(11));
+                // Adding contact to list
+                dataList.add(data);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return dataList;
+    }
 
     // Updating single contact
     public void updateDatas(int position, String value) {

@@ -8,10 +8,10 @@
     <string name="drawer_close">Slider Menu Closed</string>
     
     <!-- Application version and other information -->
-    <string name="str_code_name">Whale</string>
+    <string name="str_code_name">Baryonyx</string>
     <string name="str_stage">Beta</string>
-    <string name="str_ver">1.4</string>
-    <string name="str_rel_date">29.06.2014</string>
+    <string name="str_ver">2.1.1</string>
+    <string name="str_rel_date">09.07.2014</string>
      
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
@@ -72,4 +72,6 @@
     <string name="navigation_app">Navigation</string>
     <string name="download_app">Installing applications</string>
     <string name="about_app">We will now guide you through the basic tutorial</string>
+    
+    <string name="action_search">Search</string>
 </resources>

@@ -11,14 +11,17 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +29,7 @@ import org.json.JSONObject;
 import com.spxc.stockpile.fragments.FragList;
 import com.spxc.stockpile.helper.DatabaseHandler;
 import com.spxc.stockpile.helper.Datas;
-import com.spxc.stockpile.parser.JSONParser;
+import com.spxc.stockpile.library.JSONParserInstall;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -45,6 +48,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,15 +58,16 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.ShareActionProvider;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class AppDetailsActivity extends Activity{
 
-	String url, strId, strInstalled, strPackageName;
+	String url, strId, strInstalled, strPackageName, strStats, strName;
 	Button btnInstall, btnOpen, btnUninstall;
-	TextView txtTitle, txtDeveloper, txtSize, txtCount;
+	TextView txtTitle, txtDeveloper, txtSize, txtDesc;
 	ProgressBar loader, pBar;
 	ImageView imgIcon;
 	
@@ -70,9 +75,16 @@ public class AppDetailsActivity extends Activity{
 	
 	public static final int progress_bar_type = 0; 
 	
+	private static final String url_update_product = "http://appwhittle.com/stockpile/api/pushdata.php";
 	String file_url = "";
 	
 	final DatabaseHandler db = new DatabaseHandler(this);
+	JSONParserInstall jsonParser = new JSONParserInstall();
+	
+	private static final String TAG_SUCCESS = "success";
+	private static final String TAG_MSG = "message";
+	private static final String TAG_PID = "pid";
+	private static final String TAG_STATS = "stat";
 	
 	@Override
 	  public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +92,7 @@ public class AppDetailsActivity extends Activity{
 		  
 		  setContentView(R.layout.activity_app);
 		  
-		  Intent mIntent = getIntent();
+		  Intent mIntent = getIntent(); 
 	      Bundle mBundle = mIntent.getExtras();
 	      
 	      strId = (String) mBundle.get("id");
@@ -100,8 +112,12 @@ public class AppDetailsActivity extends Activity{
 	      loader = (ProgressBar) findViewById(R.id.pLoader);
 	      pBar = (ProgressBar) findViewById(R.id.progressBar);
 	      
+	      txtTitle = (TextView) findViewById(R.id.txtAppName);
+	      txtDeveloper = (TextView) findViewById(R.id.txtDeveloper);
+	      txtDesc = (TextView) findViewById(R.id.txtDescription);
+          imgIcon = (ImageView) findViewById(R.id.imgIcon);
+	      
 	      loader.setVisibility(View.VISIBLE);
-	      pBar.setVisibility(View.GONE);
 	      
 	      Datas data = db.getData(id);
 	      
@@ -134,13 +150,12 @@ public class AppDetailsActivity extends Activity{
 			  break;
 		  }
 	      
-	      txtTitle = (TextView) findViewById(R.id.txtAppName);
-	      txtDeveloper = (TextView) findViewById(R.id.txtDeveloper);
-	      txtCount = (TextView) findViewById(R.id.txtCount);
-          imgIcon = (ImageView) findViewById(R.id.imgIcon);
-          
+	      strStats = data.getStatistics();
+	      Log.d("LOG_TAG", strStats);
+	      
           txtTitle.setText(data.getName());
           txtDeveloper.setText(data.getDeveloper());
+          txtDesc.setText(data.getDescription());
           
           file_url = data.getDownload(); 
           
@@ -160,6 +175,9 @@ public class AppDetailsActivity extends Activity{
           btnInstall.setOnClickListener(new OnClickListener() {
 
         	    public void onClick(View v) {
+        	    	pBar.setVisibility(View.VISIBLE);
+        	    	
+        	    	new updateAppStat().execute();
         	    	new DownloadFileFromURL().execute(file_url);
         	    }
         	 });
@@ -173,7 +191,7 @@ public class AppDetailsActivity extends Activity{
 
       	    }
       	 });
-          
+            
           btnUninstall.setOnClickListener(new OnClickListener() {
 
       	    public void onClick(View v) {
@@ -189,13 +207,6 @@ public class AppDetailsActivity extends Activity{
     protected Dialog onCreateDialog(int id) {
         switch (id) {
         case progress_bar_type: // we set this to 0
-            /*pDialog = new ProgressDialog(this);
-            pDialog.setMessage("Downloading file. Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setMax(100);
-            pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            pDialog.setCancelable(true);
-            //pDialog.show();*/
             pBar.setVisibility(View.VISIBLE);
             return pDialog;
         default:
@@ -245,7 +256,8 @@ public class AppDetailsActivity extends Activity{
                     // After this onProgressUpdate will be called
                     publishProgress(""+(int)((total*100)/lenghtOfFile));
                     int intCount = (int) (total*100/lenghtOfFile);
- 
+                    pBar.setProgress(intCount);
+//                    txtCount.setText(intCount + "%");
                     // writing data to file
                     output.write(data, 0, count);
                     Log.d("PROGRESS", "PROGRESS: " + intCount);
@@ -270,8 +282,6 @@ public class AppDetailsActivity extends Activity{
          * Updating progress bar
          * */
         protected void onProgressUpdate(String... progress) {
-            // setting progress percentage
-            //pDialog.setProgress(Integer.parseInt(progress[0]));
             pBar.setProgress(Integer.parseInt(progress[0]));
        }
  
@@ -281,18 +291,12 @@ public class AppDetailsActivity extends Activity{
          * **/
         @Override
         protected void onPostExecute(String file_url) {
-            // dismiss the dialog after the file was downloaded
-            //dismissDialog(progress_bar_type);
- 
-            // Displaying downloaded image into image view 
-            // Reading image path from sdcard
             String packagePath = Environment.getExternalStorageDirectory().toString() + "/Stockpile/" + strPackageName + ".apk";
             
             Intent promptInstall = new Intent(Intent.ACTION_VIEW);
             promptInstall.setDataAndType(Uri.fromFile(new File(packagePath)), "application/vnd.android.package-archive");
             startActivityForResult(promptInstall, 0);
             pBar.setProgress(0);
-            pBar.setVisibility(View.GONE);
 
         }
  
@@ -304,7 +308,7 @@ public class AppDetailsActivity extends Activity{
 	    boolean installed = appInstalledOrNot(strPackageName);
         if (installed){
       	  btnOpen.setVisibility(View.VISIBLE);
-		      btnUninstall.setVisibility(View.VISIBLE);
+		  btnUninstall.setVisibility(View.VISIBLE);
         } else {
       	  btnOpen.setVisibility(View.GONE);
   	      btnUninstall.setVisibility(View.GONE);
@@ -361,6 +365,56 @@ public class AppDetailsActivity extends Activity{
             app_installed = false;
         }
         return app_installed ;
+    }
+	
+	class updateAppStat extends AsyncTask<String, String, String> {
+		 
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(AppDetailsActivity.this);
+            pDialog.setMessage("Saving product ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+        }
+ 
+        /**
+         * Saving product
+         * */
+        protected String doInBackground(String... args) {
+ 
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair(TAG_PID, strId));
+            params.add(new BasicNameValuePair(TAG_STATS, strStats));
+
+            JSONObject json = jsonParser.makeHttpRequest(url_update_product,
+                    "POST", params);
+ 
+            // check json success tag
+           try {
+			String success = json.getString(TAG_SUCCESS); 
+			String stat = json.getString(TAG_MSG);
+			Log.d("LOG_TAG", "Succes: " + stat);
+			int strIntId = Integer.parseInt(strId);
+			db.updateDatas(strIntId, stat);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 
+            return null;
+        }
+ 
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product uupdated
+        }
     }
 	
 }

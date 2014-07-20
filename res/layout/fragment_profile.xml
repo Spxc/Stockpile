@@ -1,9 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.mikhaellopez.circularimageviewsample"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-     
+
+    <ImageView
+        android:id="@+id/imgCover"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/apps_button_bg_normal" />
     
-     
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="59dp"
+        android:src="@drawable/ic_launcher"
+        />
+
+    <com.spxc.stockpile.widgets.TextView_Roboto
+        android:id="@+id/txtFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="17dp"
+        android:layout_toRightOf="@+id/imgProfile"
+        android:text="Name"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/txtDeveloperAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtFullName"
+        android:layout_marginRight="31dp"
+        android:text="Developer"
+        android:textAllCaps="true"
+        android:textColor="#CCCCCC"
+        android:textSize="12sp" />
+
+    <com.spxc.stockpile.widgets.TextView_Roboto
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgProfile"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="Email"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtRep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imgProfile"
+        android:layout_marginTop="27dp"
+        android:text="Repositories"
+        android:textAllCaps="true"
+        android:textColor="#999999"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtRep"
+        android:layout_below="@+id/txtRep" >
+
+    </ListView>
  
 </RelativeLayout>
